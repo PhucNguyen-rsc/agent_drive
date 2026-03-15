@@ -8,7 +8,8 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 import os
 
-engine = create_async_engine(os.getenv("DATABASE_URL"))
+db_url = os.getenv("DATABASE_URL", "").replace("postgresql://", "postgresql+asyncpg://")
+engine = create_async_engine(db_url)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 class Base(DeclarativeBase):
