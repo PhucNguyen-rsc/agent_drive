@@ -19,8 +19,8 @@ class Token(Base):
     __tablename__ = "token"
     site: Mapped[str] = mapped_column(primary_key=True)
     value: Mapped[str] = mapped_column(String)
-    updated_at: Mapped[datetime.datetime] = mapped_column(  # when it was last saved
-        DateTime,
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
         default=lambda: datetime.datetime.now(datetime.timezone.utc)
     )
     def __repr__(self) -> str:
